@@ -13,7 +13,7 @@ export default function useRequest<T>(
   params?: Record<string, any>,
   data?: Record<string, any>,
   /** 剩余完整axios高级配置 */
-  extraConfig?: Omit<AxiosRequestConfig, 'url'|'method'|'params'|'data'>,
+  extraConfig?: Omit<AxiosRequestConfig, 'url' | 'method' | 'params' | 'data'>,
   autoRun = true
 ) {
   // 基本状态设置

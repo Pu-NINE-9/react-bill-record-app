@@ -25,7 +25,8 @@
     // 地址相关
     "paths": {
       "@/*": ["./src/*"],
-      "@hooks/*": ["./src/hooks/*"]
+      "@hooks/*": ["./src/hooks/*"],
+      "@pages/*": ["./src/pages/*"]
     }
   },
   "include": ["src", "mock"]
