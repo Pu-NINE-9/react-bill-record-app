@@ -8,10 +8,10 @@ describe('useSystemStore', () => {
     useSystemStore.setState(initialState, true)
   })
 
-  it('底部导航栏包含3项，key 与 title 顺序正确', () => {
+  it('底部导航栏只包含1项（月度账单）', () => {
     const list = useSystemStore.getState().tabBarList
-    expect(list.map((i) => i.key)).toEqual(['/month', '/new', '/year'])
-    expect(list.map((i) => i.title)).toEqual(['月度账单', '记账', '年度账单'])
+    expect(list.map((i) => i.key)).toEqual(['/month'])
+    expect(list.map((i) => i.title)).toEqual(['月度账单'])
   })
 
   it('refreshFlag 初始为0，triggerRefresh 每次+1', () => {

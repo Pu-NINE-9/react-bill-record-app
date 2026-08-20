@@ -49,8 +49,7 @@ function renderLayout(initialPath = '/') {
         element: <Layout />,
         children: [
           { index: true, element: <div>index-content</div> },
-          { path: 'month', element: <div>month-content</div> },
-          { path: 'year', element: <div>year-content</div> }
+          { path: 'month', element: <div>month-content</div> }
         ]
       }
     ],
@@ -60,12 +59,12 @@ function renderLayout(initialPath = '/') {
 }
 
 describe('Layout 布局', () => {
-  it('渲染底部导航栏标题', () => {
+  it('渲染底部导航栏标题（仅月度账单）', () => {
     renderLayout()
 
     expect(screen.getByText('月度账单')).toBeInTheDocument()
-    expect(screen.getByText('记账')).toBeInTheDocument()
-    expect(screen.getByText('年度账单')).toBeInTheDocument()
+    expect(screen.queryByText('记账')).not.toBeInTheDocument()
+    expect(screen.queryByText('年度账单')).not.toBeInTheDocument()
   })
 
   it('渲染子路由出口内容', () => {

@@ -2,14 +2,16 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import type { Mock } from 'vitest'
 import DayItem from './DayItem'
-import { useRequest } from '@/hooks'
+import { useRequest, useI18n } from '@/hooks'
 import type { DayCostDetail, DayListItem } from '@/types/index'
 
 vi.mock('@/hooks', () => ({
-  useRequest: vi.fn()
+  useRequest: vi.fn(),
+  useI18n: vi.fn()
 }))
 
 const mockedUseRequest = useRequest as unknown as Mock
+const mockedUseI18n = useI18n as unknown as Mock
 
 const defaultItem: DayListItem = {
   date: '2026-01-15',
@@ -48,9 +50,15 @@ function renderDayItem(props: Partial<Parameters<typeof DayItem>[0]> = {}) {
 describe('DayItem 组件', () => {
   beforeEach(() => {
     mockedUseRequest.mockReset()
+    mockedUseI18n.mockReset()
+    mockedUseI18n.mockReturnValue({
+      t: (key: string) => key,
+      lang: '中文',
+      changeLocale: vi.fn()
+    })
   })
 
-  it('渲染日期、支出、收入、结余（保留两位小数）', () => {
+  it('渲染日期、支出、收入、结余（保留两位小数）及 i18n 标签', () => {
     mockRequest()
     renderDayItem()
 
@@ -58,6 +66,11 @@ describe('DayItem 组件', () => {
     expect(screen.getByText('-100.50')).toBeInTheDocument()
     expect(screen.getByText('50.00')).toBeInTheDocument()
     expect(screen.getByText('-50.50')).toBeInTheDocument()
+
+    // 标签走 i18n，mock t 为透传时渲染 key
+    expect(screen.getByText('day.pay')).toBeInTheDocument()
+    expect(screen.getByText('day.income')).toBeInTheDocument()
+    expect(screen.getByText('day.balance')).toBeInTheDocument()
   })
 
   it('点击图标调用 onToggle 并传入日期', () => {
@@ -79,25 +92,25 @@ describe('DayItem 组件', () => {
     expect(screen.getByText('5000').className).toContain('text-green-500')
   })
 
-  it('展开且加载中显示“明细加载中...”', () => {
+  it('展开且加载中显示加载文案（day.loading）', () => {
     mockRequest({ loading: true })
     renderDayItem({ open: true })
 
-    expect(screen.getByText('明细加载中...')).toBeInTheDocument()
+    expect(screen.getByText('day.loading')).toBeInTheDocument()
   })
 
-  it('展开且 detailList 为空数组显示“当日无账单记录”', () => {
+  it('展开且 detailList 为空数组显示空态（day.noBillData）', () => {
     mockRequest()
     renderDayItem({ open: true, detailList: [] })
 
-    expect(screen.getByText('当日无账单记录')).toBeInTheDocument()
+    expect(screen.getByText('day.noBillData')).toBeInTheDocument()
   })
 
-  it('展开但 detailList 未就绪显示提示', () => {
+  it('展开但 detailList 未就绪显示提示（day.notReady）', () => {
     mockRequest()
     renderDayItem({ open: true })
 
-    expect(screen.getByText('detailList 尚未就绪')).toBeInTheDocument()
+    expect(screen.getByText('day.notReady')).toBeInTheDocument()
   })
 
   it('展开请求成功后调用 onSaveCache 缓存明细', async () => {
