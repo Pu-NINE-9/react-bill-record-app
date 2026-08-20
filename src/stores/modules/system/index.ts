@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { BillOutline, AddCircleOutline, CalculatorOutline, SmileFill } from 'antd-mobile-icons'
+import { BillOutline } from 'antd-mobile-icons'
 
 import type { TabBarItem, TabBarStore } from '@/types/index'
 
@@ -10,16 +10,6 @@ export const useSystemStore = create<TabBarStore>((set) => ({
       key: '/month',
       title: '月度账单',
       icon: BillOutline
-    },
-    {
-      key: '/new',
-      title: '记账',
-      icon: AddCircleOutline
-    },
-    {
-      key: '/year',
-      title: '年度账单',
-      icon: CalculatorOutline
     }
   ] as TabBarItem[],
   // 刷新标识

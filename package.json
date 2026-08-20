@@ -21,8 +21,10 @@
     "axios-retry": "^4.5.0",
     "classnames": "^2.5.1",
     "dayjs": "^1.11.23",
+    "i18next": "^26.3.6",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
+    "react-i18next": "^17.0.11",
     "react-router-dom": "^7.18.2",
     "tailwindcss": "^4.3.3",
     "zustand": "^5.0.15"
