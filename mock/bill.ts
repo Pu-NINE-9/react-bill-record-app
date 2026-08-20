@@ -1,5 +1,5 @@
 import type { MockMethod } from 'vite-plugin-mock'
-import type { BillItem } from '@/types/index'
+import type { GetDayBillParams, GetDayBillRes, BillItem, DayCostDetail } from '@/types/index'
 import Mock from 'mockjs'
 
 const useForList = ['drinks', 'bonus', 'travel', 'salary', 'food', 'longdistance']
@@ -88,6 +88,56 @@ export default [
           totalBalance,
           dayList
         }
+      }
+    }
+  },
+  // /api/bill/day: 每日详细开销
+  {
+    url: '/api/bill/day',
+    method: 'get',
+    timeout: 300,
+    response: ({ query }: { query: GetDayBillParams }): GetDayBillRes => {
+      const { date } = query
+
+      if (!date) {
+        return {
+          code: 0,
+          data: {
+            dayBillList: []
+          },
+          message: '缺少date查询参数'
+        }
+      }
+
+      const template = {
+        'dayBillList|0-5': [
+          {
+            useFor: () => Mock.Random.pick(useForList),
+            // ✅ @data.useFor 拿到同层级useFor的值，不再用this，避开TS的this解析bug
+            money: '@data.useFor'
+          }
+        ]
+      }
+
+      const raw = Mock.mock(template) as { dayBillList: Array<{ useFor: string; money: string }> }
+
+      const dayBillList: DayCostDetail[] = raw.dayBillList.map((item) => {
+        const useFor = item.useFor as DayCostDetail['useFor']
+        let money: number
+        if (useFor === 'salary' || useFor === 'bonus') {
+          money = Mock.Random.float(1000, 9000, 2, 2)
+        } else {
+          money = Mock.Random.float(-300, -5, 2, 2)
+        }
+        return { useFor, money }
+      })
+
+      return {
+        code: 200,
+        data: {
+          dayBillList
+        },
+        message: dayBillList.length > 0 ? '查询成功' : '当日暂无消费记录'
       }
     }
   }

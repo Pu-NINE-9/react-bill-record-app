@@ -14,8 +14,9 @@ export default defineConfig(({ command }) => {
       tailwindcss(),
       viteMockServe({
         mockPath: 'mock', // 根目录mock文件夹
-        enable: command === 'serve', // 开发环境开启mock
-        watchFiles: true, // mock文件修改自动热更新
+        // 开发环境开启mock；测试环境(VITEST)关闭，避免 mock server 与文件监听器阻止进程退出
+        enable: command === 'serve' && !process.env.VITEST,
+        watchFiles: command === 'serve' && !process.env.VITEST, // mock文件修改自动热更新
         logger: true // 控制台打印mock接口日志
       })
     ],

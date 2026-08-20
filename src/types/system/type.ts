@@ -7,22 +7,6 @@ export interface TabBarItem {
   icon: ComponentType
 }
 
-export interface DayListItem {
-  balance: number
-  date: string
-  income: number
-  pay: number
-}
-
-export interface MonthlyDayDetail {
-  dayList: DayListItem[]
-  month: number
-  totalBalance: number
-  totalPay: number
-  totalIncome: number
-  year: number
-}
-
 // 仓库
 export interface TabBarStore {
   tabBarList: TabBarItem[]
