@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
-import instance from '@/utils/request'
+import { instance } from '@/utils/index'
 import type { AxiosRequestConfig } from 'axios'
 
 /**
