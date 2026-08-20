@@ -1,5 +1,5 @@
 // TODO: Axios 实力配置
-import axios, { type AxiosResponse, type AxiosRequestConfig } from 'axios'
+import axios from 'axios'
 import axiosRetry from 'axios-retry' // TODO: 引入错误重试
 
 // TODO: 创建实例

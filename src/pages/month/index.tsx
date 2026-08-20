@@ -102,7 +102,7 @@ export default function Month() {
 
             <div className="flex justify-between">
               <div className="text-center">
-                <div className="text-sm font-semibold">{-res?.totalPay ?? 0}</div>
+                <div className="text-sm font-semibold">{-(res?.totalPay ?? 0)}</div>
                 <div className="mt-2 text-sm">{t('month.pay')}</div>
               </div>
               <div className="text-center">

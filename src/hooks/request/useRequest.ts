@@ -34,13 +34,13 @@ export default function useRequest<T>(
 
       try {
         // 拦截器已经剥壳，直接拿到业务T，不要再 .data
-        result = await instance.request<T>({
+        result = (await instance.request<T>({
           url,
           method,
           params: { ...params, ...override?.params },
           data: { ...data, ...override?.data },
           ...extraConfig
-        })
+        })) as unknown as T
         if (!unmountRef.current) setRes(result)
       } catch (err) {
         if (!unmountRef.current) {

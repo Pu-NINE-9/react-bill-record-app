@@ -1,7 +1,6 @@
 // TODO: 导入二级路由出口
 import { Outlet, useNavigate, useLocation } from 'react-router-dom'
 import { useSystemStore } from '@/stores'
-import { useEffect } from 'react'
 import { PullToRefresh, TabBar } from 'antd-mobile'
 import { sleep } from 'antd-mobile/es/utils/sleep'
 import type { TabBarItem } from '@/types'
