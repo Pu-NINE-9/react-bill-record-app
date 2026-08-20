@@ -1,3 +1,4 @@
-import useRequest from './useRequest'
+import useRequest from './request/useRequest'
+import useI18n from './i18n/useI18n'
 
-export { useRequest }
+export { useRequest, useI18n }

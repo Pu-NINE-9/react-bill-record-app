@@ -1,5 +1,5 @@
 import { UpOutline, DownOutline } from 'antd-mobile-icons'
-import { useRequest } from '@/hooks'
+import { useRequest, useI18n } from '@/hooks'
 import type { DayListItem, DayCostDetail } from '@/types/index'
 
 interface Props {
@@ -11,6 +11,7 @@ interface Props {
 }
 
 export default function DayItem(props: Props) {
+  const { t } = useI18n()
   const { item, open, detailList, onToggle, onSaveCache } = props
 
   const { run: dayRun, loading: dayLoading } = useRequest<{ dayBillList: DayCostDetail[] }>(
@@ -51,26 +52,26 @@ export default function DayItem(props: Props) {
 
       <div className="flex border-b-2 border-gray-100 justify-between items-end pb-2">
         <div>
-          <span className="text-red-500">支出：</span>
+          <span className="text-red-500">{t('day.pay')}</span>
           <span className="ml-1 text-sm">{(-(item.pay ?? 0)).toFixed(2)}</span>
         </div>
         <div>
-          <span className="text-green-600">收入：</span>
+          <span className="text-green-600">{t('day.income')}</span>
           <span className="ml-1 text-sm">{(item.income ?? 0).toFixed(2)}</span>
         </div>
         <div>
-          <span className="ml-1 text-gray-500">结余：</span>
+          <span className="ml-1 text-gray-500">{t('day.balance')}</span>
           <span className="text-sm font-medium">{(item.balance ?? 0).toFixed(2)}</span>
         </div>
       </div>
 
       {open && (
         <div className="mt-3">
-          {dayLoading && <div className="text-gray-400">明细加载中...</div>}
+          {dayLoading && <div className="text-gray-400">{t('day.loading')}</div>}
           {detailList ? (
             <>
               {detailList.length === 0 ? (
-                <div className="text-gray-400 mt-2">当日无账单记录</div>
+                <div className="text-gray-400 mt-2">{t('day.noBillData')}</div>
               ) : (
                 detailList.map((d) => (
                   <div key={d.useFor} className="flex justify-between mt-2">
@@ -85,7 +86,7 @@ export default function DayItem(props: Props) {
               )}
             </>
           ) : (
-            <div className="text-gray-400 mt-2">detailList 尚未就绪</div>
+            <div className="text-gray-400 mt-2">{t('day.notReady')}</div>
           )}
         </div>
       )}

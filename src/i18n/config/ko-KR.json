@@ -1,0 +1,32 @@
+{
+  "month": {
+    "monthlyPay": "월간 지출",
+    "monthBill": "월 청구서",
+    "pay": "지출",
+    "income": "수입",
+    "balance": "잔액",
+    "billRecordTime": "기록 시간"
+  },
+  "day": {
+    "pay": "지출：",
+    "income": "수입：",
+    "balance": "잔액：",
+    "loading": "상세 불러오는 중...",
+    "noBillData": "해당일 청구 기록 없음",
+    "notReady": "detailList 준비되지 않음",
+    "item": {
+      "drinks": "음료",
+      "bonus": "보너스",
+      "travel": "여행",
+      "salary": "급여",
+      "food": "음식",
+      "longdistance": "통근"
+    }
+  },
+  "system": {
+    "loading": "불러오는 중...",
+    "noBillData": "이번 달 청구 데이터 없음",
+    "cancel": "취소",
+    "locale": "언어"
+  }
+}

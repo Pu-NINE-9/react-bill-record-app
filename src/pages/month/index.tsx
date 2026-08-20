@@ -1,12 +1,28 @@
-import { DatePicker, NavBar } from 'antd-mobile'
+import { DatePicker, NavBar, Button, ActionSheet } from 'antd-mobile'
 import { useSystemStore } from '@/stores'
 import { useEffect, useMemo, useState } from 'react'
-import { useRequest } from '@/hooks'
+import { useRequest, useI18n } from '@/hooks'
+import type { Locale } from '@/i18n/i18n-types'
 import DayItem from '@/components/DayItem'
 import type { MonthlyDayDetail, DayListItem, DayCostDetail } from '@/types/index'
-import { UpOutline, DownOutline } from 'antd-mobile-icons'
+import { UpOutline, DownOutline, GlobalOutline } from 'antd-mobile-icons'
 
 export default function Month() {
+  const { t, lang, changeLocale } = useI18n()
+  const [langSheetVisible, setLangSheetVisible] = useState(false)
+
+  // 语言选项，key和你的Locale类型严格对应
+  const langOptions: Array<{ label: string; value: Locale }> = [
+    { label: '中文', value: 'zh-CN' },
+    { label: 'English', value: 'en' },
+    { label: '한국어', value: 'ko-KR' }
+  ]
+
+  // 选中语言回调
+  const handleSelectLang = (val: Locale) => {
+    changeLocale(val)
+    setLangSheetVisible(false)
+  }
   const visible = useSystemStore((s) => s.visible)
   const setVisible = useSystemStore((s) => s.setVisible)
   const setDate = useSystemStore((s) => s.setDate)
@@ -58,8 +74,20 @@ export default function Month() {
   return (
     <>
       <div className="month">
-        <NavBar className="nav" backIcon={false}>
-          月度支付
+        <NavBar
+          className="nav"
+          back={
+            <div
+              className="flex items-center gap-1 cursor-pointer"
+              onClick={() => setLangSheetVisible(true)}
+            >
+              <GlobalOutline fontSize={20} />
+              <span className="text-sm">{lang}</span>
+            </div>
+          }
+          backIcon={false}
+        >
+          {t('month.monthlyPay')}
         </NavBar>
 
         <section className="screen">
@@ -68,22 +96,22 @@ export default function Month() {
               className="text-lg mb-10 flex items-center gap-2 cursor-pointer select-none"
               onClick={() => setVisible(true)}
             >
-              {date.year} | {date.month}月账单
+              {date.year} | {date.month} {t('month.monthBill')}
               {visible ? <UpOutline /> : <DownOutline />}
             </div>
 
             <div className="flex justify-between">
               <div className="text-center">
                 <div className="text-sm font-semibold">{-res?.totalPay ?? 0}</div>
-                <div className="mt-2 text-sm">支出</div>
+                <div className="mt-2 text-sm">{t('month.pay')}</div>
               </div>
               <div className="text-center">
                 <div className="text-sm font-semibold">{res?.totalIncome ?? 0}</div>
-                <div className="mt-2 text-sm">收入</div>
+                <div className="mt-2 text-sm">{t('month.income')}</div>
               </div>
               <div className="text-center">
                 <div className="text-sm font-semibold">{res?.totalBalance ?? 0}</div>
-                <div className="mt-2 text-sm">结余</div>
+                <div className="mt-2 text-sm">{t('month.balance')}</div>
               </div>
             </div>
           </div>
@@ -91,7 +119,7 @@ export default function Month() {
           <div>
             <DatePicker
               className="date"
-              title="记账时间"
+              title={t('month.billRecordTime')}
               precision="month"
               visible={visible}
               onClose={() => setVisible(false)}
@@ -108,9 +136,9 @@ export default function Month() {
 
         <section className="mx-3 mt-4 space-y-3">
           {loading ? (
-            <div className="text-center py-6 text-gray-500">加载中...</div>
+            <div className="text-center py-6 text-gray-500">{t('system.loading')}</div>
           ) : dayList.length === 0 ? (
-            <div className="text-center py-6 text-gray-500">本月暂无账单数据</div>
+            <div className="text-center py-6 text-gray-500">{t('system.noBillData')}</div>
           ) : (
             dayList.map((item, idx) => (
               <DayItem
@@ -125,6 +153,20 @@ export default function Month() {
           )}
         </section>
       </div>
+
+      {/* 语言弹窗 */}
+      <ActionSheet
+        visible={langSheetVisible}
+        onClose={() => setLangSheetVisible(false)}
+        actions={langOptions.map((opt) => ({
+          text: opt.label,
+          key: opt.value,
+          // 当前选中的语言高亮
+          danger: lang === opt.value,
+          onClick: () => handleSelectLang(opt.value)
+        }))}
+        cancelText={t('system.cancel')}
+      />
     </>
   )
 }

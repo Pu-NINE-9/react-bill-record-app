@@ -1,0 +1,32 @@
+{
+  "month": {
+    "monthlyPay": "月度支付",
+    "monthBill": "月账单",
+    "pay": "支出",
+    "income": "收入",
+    "balance": "结余",
+    "billRecordTime": "记账时间"
+  },
+  "day": {
+    "pay": "支出：",
+    "income": "收入：",
+    "balance": "结余：",
+    "loading": "明细加载中...",
+    "noBillData": "当日无账单记录",
+    "notReady": "detailList 尚未就绪",
+    "item": {
+      "drinks": "饮品",
+      "bonus": "奖金",
+      "travel": "旅行",
+      "salary": "工资",
+      "food": "食物",
+      "longdistance": "通勤"
+    }
+  },
+  "system": {
+    "loading": "加载中...",
+    "noBillData": "本月暂无账单数据",
+    "cancel": "取消",
+    "locale": "语言"
+  }
+}

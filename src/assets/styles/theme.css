@@ -1,8 +1,9 @@
 /* 全局主题色切换 */
-/* :root:root {
-  --adm-color-primary: #a062d4;
-} */
+:root:root {
+  --adm-color-primary: #fbafde;
+}
 
+/* 局部生效 */
 .tab-bar {
   --adm-color-primary: #fbafde;
 }

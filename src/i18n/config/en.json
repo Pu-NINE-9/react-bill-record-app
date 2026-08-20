@@ -1,0 +1,32 @@
+{
+  "month": {
+    "monthlyPay": "Monthly Payment",
+    "monthBill": "Monthly Bill",
+    "pay": "Expense",
+    "income": "Income",
+    "balance": "Balance",
+    "billRecordTime": "Record Time"
+  },
+  "day": {
+    "pay": "Expense: ",
+    "income": "Income: ",
+    "balance": "Balance: ",
+    "loading": "Loading details...",
+    "noBillData": "No bill records for this day",
+    "notReady": "detailList is not ready",
+    "item": {
+      "drinks": "drinks",
+      "bonus": "bonus",
+      "travel": "travel",
+      "salary": "salary",
+      "food": "food",
+      "longdistance": "longdistance"
+    }
+  },
+  "system": {
+    "loading": "Loading...",
+    "noBillData": "No bill data for this month",
+    "cancel": "cancel",
+    "locale": "Language"
+  }
+}
