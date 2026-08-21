@@ -75,13 +75,13 @@ export default function Month() {
     <>
       <div className="month">
         <NavBar
-          className="nav"
+          className="nav text-[#fbafde]"
           back={
             <div
-              className="flex items-center gap-1 cursor-pointer"
+              className="flex items-center gap-1 cursor-pointer active:text-[#fbafde]"
               onClick={() => setLangSheetVisible(true)}
             >
-              <GlobalOutline fontSize={20} />
+              <GlobalOutline fontSize={20} className="text-inherit" />
               <span className="text-sm">{lang}</span>
             </div>
           }

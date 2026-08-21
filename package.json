@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "lint-staged": "lint-staged",
     "format": "prettier --write .",
-    "preview": "vite preview --open",
+    "preview": "cross-env NODE_ENV=production node .output/server/index.mjs",
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:run": "vitest run",
@@ -48,6 +48,7 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.4",
     "@vitest/ui": "^4.1.10",
+    "cross-env": "^10.1.0",
     "eslint": "^10.8.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.6",
@@ -60,9 +61,11 @@
     "lint-staged": "^17.3.0",
     "mockjs": "^1.1.0",
     "prettier": "^3.9.6",
+    "terser": "^5.50.0",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.65.0",
     "vite": "^8.2.0",
+    "vite-plugin-compression2": "^2.5.3",
     "vite-plugin-mock": "^3.0.2",
     "vitest": "^4.1.10"
   }

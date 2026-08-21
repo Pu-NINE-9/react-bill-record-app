@@ -46,7 +46,11 @@ export default function DayItem(props: Props) {
       <div className="flex justify-between items-start mb-3">
         <div className="text-xl font-medium">{item.date}</div>
         <div className="icon" onClick={handleClick}>
-          {open ? <UpOutline fontSize={20} /> : <DownOutline fontSize={20} />}
+          {open ? (
+            <UpOutline fontSize={20} className="text-[#fbafde]" />
+          ) : (
+            <DownOutline fontSize={20} className="text-[#fbafde]" />
+          )}
         </div>
       </div>
 

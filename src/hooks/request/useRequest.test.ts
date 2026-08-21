@@ -4,8 +4,8 @@ import type { Mock } from 'vitest'
 import useRequest from './useRequest'
 import { instance } from '@/utils/index'
 
-vi.mock('@/utils/request', () => ({
-  default: { request: vi.fn() }
+vi.mock('@/utils/index', () => ({
+  instance: { request: vi.fn() }
 }))
 
 const mockedRequest = instance.request as unknown as Mock
