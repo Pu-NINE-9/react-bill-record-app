@@ -1,0 +1,35 @@
+# 依赖
+node_modules
+
+# 构建产物
+.output
+.nitro
+dist
+dist-ssr
+
+# 版本控制 / CI / 提交钩子
+.git
+.github
+.husky
+
+# 环境变量：构建时通过 --build-arg 注入，不打进镜像
+.env
+.env.*
+!.env.example
+
+# 测试（生产构建不需要）
+coverage
+**/*.test.ts
+**/*.test.tsx
+**/*.spec.ts
+**/*.spec.tsx
+
+# 编辑器与系统文件
+.vscode
+.idea
+.DS_Store
+*.log
+
+# 文档
+README.md
+docs
