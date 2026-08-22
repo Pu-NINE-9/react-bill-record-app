@@ -4,7 +4,6 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        # 前端接口基地址，默认与 Nitro 后端同源 /api
         VITE_BASE_URL: /api
     image: bill-record:latest
     container_name: bill-record
@@ -14,6 +13,7 @@ services:
     environment:
       NODE_ENV: production
       PORT: 3000
-    # 若需要持久化或调试，可挂载卷（当前应用无状态，无需数据卷）
+      NITRO_HOST: 0.0.0.0
+    # 当前无状态，不需要数据卷
     # volumes:
     #   - ./logs:/app/logs
